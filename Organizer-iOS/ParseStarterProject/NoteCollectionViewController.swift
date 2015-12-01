@@ -1,5 +1,5 @@
 //
-//  CategoryTableViewController.swift
+//  NoteCollectionViewController.swift
 //  Organizer-iOS
 //
 //  Created by Ben Ribovich on 11/30/15.
@@ -10,29 +10,8 @@ import UIKit
 import Parse
 import ParseUI
 
-class CategoryTableViewController: PFQueryTableViewController {
+class NoteCollectionViewController: PFQueryCollectionViewController {
 
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        
-        // Configure the PFQueryTableView
-        self.parseClassName = "_User"
-        
-        self.textKey = "yourObject"
-        self.pullToRefreshEnabled = true
-        self.paginationEnabled = false
-    }
-    
-    
-    override func queryForTable() -> PFQuery {
-        let query = PFQuery(className: self.parseClassName!)
-        query.whereKey("objectId", equalTo: (PFUser.currentUser()?.objectId)!)
-        query.includeKey("categories")
-        return query
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
