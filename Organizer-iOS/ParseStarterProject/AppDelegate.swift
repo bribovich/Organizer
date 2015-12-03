@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // PFFacebookUtils.initializeFacebook()
         // ****************************************************************************
 
-        PFUser.enableAutomaticUser()
+        //PFUser.enableAutomaticUser()
 
         let defaultACL = PFACL();
 
@@ -69,6 +69,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var initialViewController : UIViewController?
+        
+        if (PFUser.currentUser()?.username == nil) {
+            initialViewController = storyboard.instantiateViewControllerWithIdentifier("Login")
+        }
+        else{
+            initialViewController = storyboard.instantiateViewControllerWithIdentifier("MainNavigationController")
+            
+        }
+        
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
 
         //
         //  Swift 1.2

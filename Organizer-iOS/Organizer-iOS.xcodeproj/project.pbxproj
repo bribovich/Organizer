@@ -20,6 +20,10 @@
 		C053838A1C0CD1A7005E6FA8 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05383891C0CD1A6005E6FA8 /* CategoryTableViewController.swift */; };
 		C053838B1C0CD2A4005E6FA8 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81801A49E10C00E65899 /* ParseUI.framework */; };
 		C053838C1C0CD2CE005E6FA8 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA816D1A49DB6800E65899 /* ParseCrashReporting.framework */; };
+		C0EB2DFB1C0E8FC40099A12B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB2DFA1C0E8FC40099A12B /* SignUpViewController.swift */; };
+		C0EB2DFD1C0E91A80099A12B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB2DFC1C0E91A80099A12B /* LoginViewController.swift */; };
+		C0EB2DFF1C0F73750099A12B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0EB2DFE1C0F73750099A12B /* LaunchScreen.storyboard */; };
+		C0EB2E011C10C73C0099A12B /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB2E001C10C73C0099A12B /* CollectionViewFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +42,10 @@
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		C050457F1C0CE66B0094590E /* NoteCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollectionViewController.swift; sourceTree = "<group>"; };
 		C05383891C0CD1A6005E6FA8 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
+		C0EB2DFA1C0E8FC40099A12B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		C0EB2DFC1C0E91A80099A12B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C0EB2DFE1C0F73750099A12B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C0EB2E001C10C73C0099A12B /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,9 +98,13 @@
 			isa = PBXGroup;
 			children = (
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
+				C0EB2DFE1C0F73750099A12B /* LaunchScreen.storyboard */,
+				C0EB2DFC1C0E91A80099A12B /* LoginViewController.swift */,
+				C0EB2DFA1C0E8FC40099A12B /* SignUpViewController.swift */,
 				814C3AC61B69877600E307BB /* Main.storyboard */,
 				C05383891C0CD1A6005E6FA8 /* CategoryTableViewController.swift */,
 				C050457F1C0CE66B0094590E /* NoteCollectionViewController.swift */,
+				C0EB2E001C10C73C0099A12B /* CollectionViewFlowLayout.swift */,
 			);
 			path = ParseStarterProject;
 			sourceTree = "<group>";
@@ -179,6 +191,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0EB2DFF1C0F73750099A12B /* LaunchScreen.storyboard in Resources */,
 				814C3ACA1B69877600E307BB /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
 			);
@@ -208,8 +221,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0EB2E011C10C73C0099A12B /* CollectionViewFlowLayout.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				C053838A1C0CD1A7005E6FA8 /* CategoryTableViewController.swift in Sources */,
+				C0EB2DFB1C0E8FC40099A12B /* SignUpViewController.swift in Sources */,
+				C0EB2DFD1C0E91A80099A12B /* LoginViewController.swift in Sources */,
 				C05045801C0CE66B0094590E /* NoteCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
