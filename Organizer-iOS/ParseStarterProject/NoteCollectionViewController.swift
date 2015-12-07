@@ -10,9 +10,12 @@ import UIKit
 import Parse
 import ParseUI
 
-class NoteCollectionViewController: UICollectionViewController {
+class NoteCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate {
 
     var category : PFObject?
+    var startPointforDrag : CGPoint?
+    var startY: CGFloat?
+    var movingCell : UICollectionViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,11 @@ class NoteCollectionViewController: UICollectionViewController {
         
         let createButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "createNewNote:")
         self.navigationItem.rightBarButtonItem = createButton
+        
+        let panSelector = Selector("pan:")
+        let vertPan = UIPanGestureRecognizer(target: self, action: panSelector)
+        vertPan.delegate = self
+        self.collectionView?.addGestureRecognizer(vertPan)
     }
 
 
@@ -54,10 +62,13 @@ class NoteCollectionViewController: UICollectionViewController {
         }
         
         //Swipe up to delete
-        let cSelector = Selector("reset:")
-        let UpSwipe = UISwipeGestureRecognizer(target: self, action: cSelector )
-        UpSwipe.direction = UISwipeGestureRecognizerDirection.Up
-        cell.addGestureRecognizer(UpSwipe)
+        //let panSelector = Selector("pan:")
+        //let cSelector = Selector("reset:")
+        //let vertPan = UIPanGestureRecognizer(target: self, action: panSelector)
+        //let UpSwipe = UISwipeGestureRecognizer(target: self, action: cSelector )
+        //UpSwipe.direction = UISwipeGestureRecognizerDirection.Up
+        //cell.addGestureRecognizer(UpSwipe)
+        //cell.addGestureRecognizer(vertPan)
         
         return cell
 
@@ -122,17 +133,42 @@ class NoteCollectionViewController: UICollectionViewController {
         
     }
     
+    func pan(sender: UIPanGestureRecognizer){
+        
+        if (sender.state == UIGestureRecognizerState.Began){
+            startPointforDrag = sender.locationInView(self.collectionView)
+            let indexPathOfMovingCell = self.collectionView?.indexPathForItemAtPoint(sender.locationInView(self.collectionView))
+            movingCell = self.collectionView?.cellForItemAtIndexPath(indexPathOfMovingCell!)
+            startY = movingCell?.frame.origin.y
+            
+        }
+        if(sender.state == UIGestureRecognizerState.Changed){
+            let location = sender.locationInView(self.collectionView)
+            movingCell!.frame=CGRect(x: movingCell!.frame.origin.x, y: startY! - (startPointforDrag!.y-location.y), width: movingCell!.frame.width, height: movingCell!.frame.height)
+            
+        }
+        
+        
+    }
+    
+    
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let velocity = (gestureRecognizer as! UIPanGestureRecognizer).velocityInView(self.collectionView)
+        return(fabs(velocity.y) > fabs(velocity.x))
+    }
+    
     func reset(sender: UISwipeGestureRecognizer) {
         let cell = sender.view as! UICollectionViewCell
         let i = self.collectionView!.indexPathForCell(cell)!.item
-        
+        var nextCell : UICollectionViewCell?
         
         UIView.animateWithDuration(0.5, animations: {
             
             cell.frame=CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y - self.view.frame.height, width: cell.frame.width, height: cell.frame.height)
             print(i)
+            
             if(i != (self.category!["notes"] as! [PFObject]).count - 1 ){
-                let nextCell = self.collectionView?.cellForItemAtIndexPath(NSIndexPath(forRow: i+1, inSection: 0))
+                nextCell = (self.collectionView?.cellForItemAtIndexPath(NSIndexPath(forRow: i+1, inSection: 0)))!
                 print(nextCell)
                 nextCell!.frame = CGRect(x: nextCell!.frame.origin.x - cell.frame.width, y: nextCell!.frame.origin.y, width: nextCell!.frame.width, height: nextCell!.frame.height)
                 
@@ -140,6 +176,10 @@ class NoteCollectionViewController: UICollectionViewController {
 
             }, completion: { (Bool) -> Void in
                 cell.frame = CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y + self.view.frame.height, width: cell.frame.width, height: cell.frame.height)
+                if((nextCell) != nil){
+                    nextCell!.frame = CGRect(x: nextCell!.frame.origin.x + cell.frame.width, y: nextCell!.frame.origin.y, width: nextCell!.frame.width, height: nextCell!.frame.height)
+                }
+                
                 var notes = self.category!["notes"] as! [PFObject]
                 notes.removeAtIndex(i)
                 self.category!["notes"] = notes
@@ -150,6 +190,9 @@ class NoteCollectionViewController: UICollectionViewController {
         
         
     }
+    
+    
+
     
 
     /*

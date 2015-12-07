@@ -74,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewController : UIViewController?
-        
         if (PFUser.currentUser()?.username == nil) {
             initialViewController = storyboard.instantiateViewControllerWithIdentifier("Login")
         }
